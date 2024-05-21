@@ -26,7 +26,7 @@ const productValidation = z.object({
   description: z.string().nonempty("Product description is required."),
   price: z.number().nonnegative("Product price must be a non-negative number."),
   category: z.string().nonempty("Product category is required."),
-  tags: z.enum(["computer", "peripherals", "wireless", "ergonomic"]),
+  tags: z.array(z.string().nonempty()).nonempty("Product tags are required."),
   variants: z
     .array(variantValidation)
     .nonempty("Product variants are required."),

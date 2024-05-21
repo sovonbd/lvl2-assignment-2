@@ -23,8 +23,7 @@ const productSchema = new Schema<TProduct>({
   price: { type: Number, required: [true, "Product price is required."] },
   category: { type: String, required: [true, "Product category is required."] },
   tags: {
-    type: String,
-    enum: ["computer", "peripherals", "wireless", "ergonomic"],
+    type: [String],
     required: [true, "Product tag is required."],
   },
   variants: {

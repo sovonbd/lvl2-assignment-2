@@ -13,7 +13,7 @@ export type TProduct = {
   description: string;
   price: number;
   category: string;
-  tags: "computer" | "peripherals" | "wireless" | "ergonomic";
+  tags: string[];
   variants: TVariant[];
   inventory: TInventory;
 };
