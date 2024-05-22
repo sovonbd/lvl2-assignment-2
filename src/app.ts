@@ -7,6 +7,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
+// default api
 app.use("/api/products", ProductRouter);
 
 app.get("/", (req: Request, res: Response) => {
