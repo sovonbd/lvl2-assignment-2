@@ -46,7 +46,6 @@ const getProducts = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       success: false,
       message: "Something is wrong",
@@ -67,7 +66,6 @@ const getSingleProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       success: false,
       message: "Something is wrong",
@@ -91,7 +89,6 @@ const updateSingleProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       success: false,
       message: "Something is wrong",
@@ -111,34 +108,6 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      success: false,
-      message: "Something is wrong",
-      data: error,
-    });
-  }
-};
-
-// delete single product controller
-const searchProducts = async (req: Request, res: Response) => {
-  try {
-    const { searchTerm } = req.query;
-    if (!searchTerm) {
-      return res.status(400).json({
-        success: false,
-        message: "Search term is required",
-      });
-    }
-    console.log(searchTerm);
-    const result = await ProductService.searchProductInDB(searchTerm as string);
-    res.status(200).json({
-      success: true,
-      mesage: "Products matching search term fetched successfully!",
-      data: result,
-    });
-  } catch (error) {
-    console.log(error);
     res.status(400).json({
       success: false,
       message: "Something is wrong",

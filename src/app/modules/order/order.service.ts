@@ -82,7 +82,7 @@ const getOrdersFromDB = async () => {
 };
 
 const getOrdersFromDBByEmail = async (email: string) => {
-  const result = await Order.findOne({ email: email });
+  const result = await Order.find({ email });
   return result;
 };
 

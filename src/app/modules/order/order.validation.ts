@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { TOrder } from "./order.interface";
 
 // Define the order validation
 const orderValidation = z.object({
