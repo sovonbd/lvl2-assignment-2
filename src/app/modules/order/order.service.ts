@@ -35,8 +35,6 @@ const createOrderInDB = async (orderData: TOrder) => {
       },
     ]).session(session);
 
-    // console.log("Product Data:", productData);
-
     if (productData.length === 0) {
       throw new Error("Product not found");
     }
@@ -46,7 +44,7 @@ const createOrderInDB = async (orderData: TOrder) => {
     const { quantity: orderQuantity } = orderData;
 
     if (productInfo.inventory.quantity < orderQuantity) {
-      throw new Error("Not enough product quantity available");
+      throw new Error("Insufficient quantity available in inventory");
     }
 
     // Calculate the new product quantity and determine the inStock status
@@ -62,7 +60,7 @@ const createOrderInDB = async (orderData: TOrder) => {
           "inventory.inStock": newInStockStatus,
         },
       },
-      { new: true, session } // Ensure the session is used here
+      { new: true, session }
     );
 
     await session.commitTransaction();
@@ -76,11 +74,13 @@ const createOrderInDB = async (orderData: TOrder) => {
   }
 };
 
+// get all orders
 const getOrdersFromDB = async () => {
   const result = await Order.find();
   return result;
 };
 
+// get orders by email
 const getOrdersFromDBByEmail = async (email: string) => {
   const result = await Order.find({ email });
   return result;

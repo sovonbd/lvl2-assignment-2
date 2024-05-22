@@ -27,15 +27,24 @@ const createOrder = async (req: Request, res: Response) => {
 // get all and email query data controller
 const getOrders = async (req: Request, res: Response) => {
   try {
+    // retrive orders based on email query
     const { email } = req.query;
     if (email) {
       const result = await OrderService.getOrdersFromDBByEmail(email as string);
-      res.status(200).json({
+      if (result.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "Order not found.",
+          data: [],
+        });
+      }
+      return res.status(200).json({
         success: true,
         message: "Orders fetched successfully for user email!",
         data: result,
       });
     } else {
+      // retrive all orders
       const result = await OrderService.getOrdersFromDB();
       res.status(200).json({
         success: true,
